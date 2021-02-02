@@ -1,0 +1,15 @@
+R 1200 800
+NO ./brick_wall.xpm
+SO ./brick_wall.xpm
+WE ./brick_wall.xpm
+EA ./brick_wall.xpm
+S ./path_to_the_sprite_texture
+F 255,159,0
+C 126,15,0
+
+
+ 11111111111111
+ 11N00002000001
+ 10000001111101
+ 110000011  121
+  1111111   111
