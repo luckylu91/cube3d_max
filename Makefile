@@ -1,4 +1,4 @@
-CC =			clang
+CC =			gcc
 CFLAGS =		-Wall -Wextra -Werror
 NAME =			Cub3D
 LIBFT_DIR =		libft
