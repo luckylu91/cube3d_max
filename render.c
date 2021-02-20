@@ -50,6 +50,8 @@ static void	render_sprites(t_pack *p)
 	sp_lst = p->sprites;
 	while (sp_lst)
 	{
+		// if (ft_lstfind(p->enemies, sprite_at(sp_lst), sizeof(t_sprite)))
+		// 	// printf("rendering sprite %p\n", sprite_at(sp_lst));
 		dist = (sprite_at(sp_lst)->pos.x - p->pos.x) * p->dir.x + (sprite_at(sp_lst)->pos.y - p->pos.y) * p->dir.y;
 		if (dist < SCREEN_DIST)
 		{
@@ -71,9 +73,40 @@ static void	render_sprites(t_pack *p)
 	}
 }
 
+static void draw_lives(t_pack *p)
+{
+	t_ipt2d	lives_origin;
+	t_ipt2d	curr_origin;
+	int		life_width;
+	int		i;
+	t_img	*im;
+
+	life_width = p->width * .1;
+	lives_origin = ipt2d(p->width - (1 + p->lives_max) * life_width, .1 * p->height);
+	i = -1;
+	while (++i < p->lives_max)
+	{
+	
+		if (i < p->lives)
+			im = &p->heart_img;
+		else if (i == p->lives)
+		{
+			if (fmod(p->time_invul, TIME_BEEP_LIFE) > TIME_BEEP_LIFE / 2)
+				im = &p->heart_img;
+			else
+				im = &p->heart_empty_img;
+		}
+		else
+			im = &p->heart_empty_img;
+		curr_origin = ipt2d(lives_origin.x + i * life_width, lives_origin.y);
+		draw_rect_image(buff_img(p), im, curr_origin, life_width);
+	}
+}
+
 void render(t_pack *p)
 {
-	clear_image(&p->win_img[p->win_buffered]);
+	clear_image(buff_img(p));
 	render_rays(p);
 	render_sprites(p);
+	draw_lives(p);
 }

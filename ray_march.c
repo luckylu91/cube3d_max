@@ -14,12 +14,12 @@ static double	ray_march_x(t_pt2d *pos, t_pt2d *dir, t_map *map, t_wall *hit)
 		y = pos->y + ((double)x_index - pos->x) * dir->y / dir->x;
 		while (in_bounds2D(x_index + (x_incr - 1) / 2, (int)floor(y), map))
 		{
-			if (map->grid[x_index + (x_incr - 1) / 2][(int)floor(y)] == WALL)
+			if (is_blocking(x_index + (x_incr - 1) / 2, (int)floor(y), map))
 			{
 				hit->left_right_coef = y - floor(y);
 				if (dir->x < 0.)
 					hit->left_right_coef = 1 - hit->left_right_coef;
-				hit->hit_x = x_index;
+				hit->hit_x = x_index + (x_incr - 1) / 2;
 				hit->hit_y = y;
 				return (norm(x_index - pos->x, y - pos->y));
 			}
@@ -44,13 +44,13 @@ static double	ray_march_y(t_pt2d *pos, t_pt2d *dir, t_map *map, t_wall *hit)
 		x = pos->x + ((double)y_index - pos->y) * dir->x / dir->y;
 		while (in_bounds2D((int)floor(x), y_index + (y_incr - 1) / 2, map))
 		{
-			if (map->grid[(int)floor(x)][y_index + (y_incr - 1) / 2] == WALL)
+			if (is_blocking((int)floor(x), y_index + (y_incr - 1) / 2, map))
 			{
 				hit->left_right_coef = 1 - (x - floor(x));
 				if (dir->y < 0.)
 					hit->left_right_coef = 1 - hit->left_right_coef;
 				hit->hit_x = x;
-				hit->hit_y = y_index;
+				hit->hit_y = y_index + (y_incr - 1) / 2;
 				return (norm(x - pos->x, y_index - pos->y));
 			}
 			x += y_incr * dir->x / dir->y;

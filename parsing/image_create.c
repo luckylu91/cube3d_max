@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image_create.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzins <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/10 16:04:35 by lzins             #+#    #+#             */
+/*   Updated: 2021/02/10 17:25:25 by lzins            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse.h"
 
-int colored_image(void *mlx, int color, t_img *res)
+int		colored_image(void *mlx, int color, t_img *res)
 {
 	void *img;
-	
+
 	if (!(img = mlx_new_image(mlx, 1, 1)))
 		return (-1);
 	*res = img_from_ptr(img, 1, 1);
@@ -11,33 +23,21 @@ int colored_image(void *mlx, int color, t_img *res)
 	return (1);
 }
 
-int	load_sprite_image(void *mlx, int type, t_sprite_img *res)
+int		funky_image(t_pack *p, t_img *im)
 {
-	//TODO
-	void *img;
-	t_img im;
-	int w;
-	int h;
+	void	*img;
+	int		x;
+	int		y;
 
-	if (type == PEA && !(img = mlx_xpm_file_to_image(mlx, "dot.xpm", &w, &h)))
+	if (!(img = mlx_new_image(p->mlx, 256, 256)))
 		return (-1);
-	if (type == GHOST && !(img = mlx_xpm_file_to_image(mlx, "red_face.xpm", &w, &h)))
-		return (-1);
-	im = img_from_ptr(img, w, h);
-	res->im = im;
-	if (type == PEA)
+	*im = img_from_ptr(img, 256, 256);
+	x = -1;
+	while (++x < 256)
 	{
-		res->img_ratio.x = .2;
-		res->img_ratio.y = .2;
-		res->img_offset.x = 0.;
-		res->img_offset.y = 0.;
-	}
-	else if (type == GHOST)
-	{
-		res->img_ratio.x = 1;
-		res->img_ratio.y = 1;
-		res->img_offset.x = 0.;
-		res->img_offset.y = 0.;
+		y = -1;
+		while (++y < 256)
+			color_pix(im, x, y, (x << 16) + y);
 	}
 	return (1);
 }

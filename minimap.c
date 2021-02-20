@@ -1,6 +1,7 @@
 #include "cub3d.h"
 
 #define COLOR_MINI_WALL 0X000E18A2
+#define COLOR_PORTAL 0X005EE51B
 
 // TODO crete circle img only once
 
@@ -52,26 +53,26 @@ void draw_pacu(t_pack *p, double mouth_angle, double mouth_openness, unsigned in
 	t_ipt2d	delta;
 	t_pt2d pacu_coord;
 	t_pt2d offsets;
-	int block_size;
+	// int block_size;
 
-	block_size = p->mini_width / p->map.width;
-	offsets.x = (int)p->pos.x * block_size + p->mini_origin.x;
-	offsets.y = (int)p->pos.y * block_size + p->mini_origin.y;
+	//block_size = p->mini_width / p->map.width;
+	offsets.x = (int)p->pos.x * p->mini.block_size + p->mini.ox;
+	offsets.y = (int)p->pos.y * p->mini.block_size + p->mini.oy;
 	delta.x = - 1;
-	while (++delta.x < block_size)
+	while (++delta.x < p->mini.block_size)
 	{
 		delta.y = - 1;
-		while (++delta.y < block_size)
+		while (++delta.y < p->mini.block_size)
 		{
-			pacu_coord.x = (delta.x - block_size / 2.) * cos(mouth_angle)
-							- (delta.y - block_size / 2.) * sin(mouth_angle);
-			pacu_coord.y = (delta.x - block_size / 2.) * sin(mouth_angle)
-							+ (delta.y - block_size / 2.) * cos(mouth_angle);
-			if (sqnorm(pacu_coord.x, pacu_coord.y) <= pow(block_size, 2) / 4.
+			pacu_coord.x = (delta.x - p->mini.block_size / 2.) * cos(mouth_angle)
+							- (delta.y - p->mini.block_size / 2.) * sin(mouth_angle);
+			pacu_coord.y = (delta.x - p->mini.block_size / 2.) * sin(mouth_angle)
+							+ (delta.y - p->mini.block_size / 2.) * cos(mouth_angle);
+			if (sqnorm(pacu_coord.x, pacu_coord.y) <= pow(p->mini.block_size, 2) / 4.
 					&& (pacu_coord.x < 0
 						|| fabs(pacu_coord.y) >= sin(mouth_openness) * pacu_coord.x))
 				color_pix(
-					&p->win_img[p->win_buffered],
+					buff_img(p),
 					delta.x + offsets.x,
 					delta.y + offsets.y,
 					color);
@@ -85,22 +86,22 @@ void draw_one_enemy(t_pack *p, t_sprite *sprite)
 	t_ipt2d	offsets;
 	t_ipt2d sprite_coord;
 	t_ipt2d	delta;
-	int		block_size;
+	// int		p->mini.block_size;
 
-	block_size = p->mini_width / p->map.width;
+	//p->mini.block_size = p->mini_width / p->map.width;
 	sprite_im = sprite->simg->im;
-	offsets.x = (int)(sprite->pos.x) * block_size + p->mini_origin.x;
-	offsets.y = (int)(sprite->pos.y) * block_size + p->mini_origin.y;
+	offsets.x = (int)(sprite->pos.x) * p->mini.block_size + p->mini.ox;
+	offsets.y = (int)(sprite->pos.y) * p->mini.block_size + p->mini.oy;
 	delta.x = -1;
-	while (++delta.x < block_size)
+	while (++delta.x < p->mini.block_size)
 	{
 		delta.y = -1;
-		while (++delta.y < block_size)
+		while (++delta.y < p->mini.block_size)
 		{
-			sprite_coord.x = delta.x * (double)sprite_im.width / block_size;
-			sprite_coord.y = delta.y * (double)sprite_im.height / block_size;
+			sprite_coord.x = delta.x * (double)sprite_im.width / p->mini.block_size;
+			sprite_coord.y = delta.y * (double)sprite_im.height / p->mini.block_size;
 			color_pix_transparency(
-				&p->win_img[p->win_buffered],
+				buff_img(p),
 				offsets.x + delta.x,
 				offsets.y + delta.y,
 				*get_pix_address(&sprite_im, sprite_coord.x, sprite_coord.y));
@@ -122,23 +123,113 @@ void draw_enemies(t_pack *p)
 	}
 }
 
+void minimap_border(t_pack *p)
+{
+	rect_fill(
+		buff_img(p),
+		p->mini.ox - p->mini.border_thickness,
+		p->mini.oy - p->mini.border_thickness,
+		p->mini.ox + p->mini.width + p->mini.border_thickness,
+		p->mini.oy,
+		0X00FFFFFF
+	);
+	rect_fill(
+		buff_img(p),
+		p->mini.ox - p->mini.border_thickness,
+		p->mini.oy + p->mini.height,
+		p->mini.ox + p->mini.width + p->mini.border_thickness,
+		p->mini.oy + p->mini.height + p->mini.border_thickness,
+		0X00FFFFFF
+	);
+	rect_fill(
+		buff_img(p),
+		p->mini.ox - p->mini.border_thickness,
+		p->mini.oy,
+		p->mini.ox,
+		p->mini.oy + p->mini.height,
+		0X00FFFFFF
+	);
+	rect_fill(
+		buff_img(p),
+		p->mini.ox + p->mini.width,
+		p->mini.oy,
+		p->mini.ox + p->mini.width + p->mini.border_thickness,
+		p->mini.oy + p->mini.height,
+		0X00FFFFFF
+	);
+}
+
+int		draw_neighbor_fun(t_map *map, t_ipt2d coord, t_ipt2d coord2, void *pack_ptr)
+{
+	int		wall_color;
+	t_pack	*p;
+	t_ipt2d	ul_corner;
+	t_ipt2d	lr_corner;
+
+	if (!in_bounds2D(coord2.x, coord2.y, map) || !is_blocking(coord2.x, coord2.y, map))
+		return (1);
+	p = (t_pack*)pack_ptr;
+	wall_color = (block_at(map, coord) == WALL) ? COLOR_MINI_WALL : COLOR_PORTAL;
+	coord2 = sub_ipt2d(coord2, coord);
+	if (coord2.x == 0)
+	{
+		ul_corner.x = (coord.x + .4) * p->mini.block_size;
+		lr_corner.x = (coord.x + .6) * p->mini.block_size;
+		if (coord2.y == -1)
+		{
+			ul_corner.y = coord.y * p->mini.block_size;
+			lr_corner.y = (coord.y + .4) * p->mini.block_size;
+		}
+		else
+		{
+			ul_corner.y = (coord.y + .6) * p->mini.block_size;
+			lr_corner.y = (coord.y + 1.) * p->mini.block_size;
+		}
+	}
+	else
+	{
+		ul_corner.y = (coord.y + .4) * p->mini.block_size;
+		lr_corner.y = (coord.y + .6) * p->mini.block_size;
+		if (coord2.x == -1)
+		{
+			ul_corner.x = coord.x * p->mini.block_size;
+			lr_corner.x = (coord.x + .4) * p->mini.block_size;
+		}
+		else
+		{
+			ul_corner.x = (coord.x + .6) * p->mini.block_size;
+			lr_corner.x = (coord.x + 1.) * p->mini.block_size;
+		}
+	}
+	rect_fill(
+		buff_img(p),
+		p->mini.ox + ul_corner.x,
+		p->mini.oy + ul_corner.y,
+		p->mini.ox + lr_corner.x,
+		p->mini.oy + lr_corner.y,
+		wall_color
+	);
+	return (1);
+}
+
 // TODO ? only clear pacu & ghosts
 void render_minimap(t_pack *p)
 {
 	int x;
 	int y;
 	t_pt2d pacu_offset;
-	int block_size;
+	int wall_color;
+	// int block_size;
 
-	block_size = p->mini_width / p->map.width;
+	//block_size = p->mini_width / p->map.width;
 	//clear_image(&p->mini_win_img[p->win_buffered]);
 	rect_fill(
-		&p->win_img[p->win_buffered],
-		p->mini_origin.x,
-		p->mini_origin.y,
-		p->mini_origin.x + p->mini_width,
-		p->mini_origin.y + p->mini_width * p->map.height / p->map.width,
-		0x00000000
+		buff_img(p),
+		p->mini.ox,
+		p->mini.oy,
+		p->mini.ox + p->mini.width,
+		p->mini.oy + p->mini.height,
+		0X00000000
 	);
 	x = -1;
 	while (++x < p->map.width)
@@ -146,56 +237,58 @@ void render_minimap(t_pack *p)
 		y = -1;
 		while (++y < p->map.height)
 		{
-			if (p->map.grid[x][y] == WALL)
+			if (p->map.grid[x][y] == WALL || p->map.grid[x][y] == TELEP)
 			{
+				iter_four_neighbors(&p->map, ipt2d(x, y), p, &draw_neighbor_fun);
+				wall_color = (p->map.grid[x][y] == WALL) ? COLOR_MINI_WALL : COLOR_PORTAL;
 				//center
 				rect_fill(
-					&p->win_img[p->win_buffered],
-					p->mini_origin.x + (x + .4) * block_size,
-					p->mini_origin.y + (y + .4) * block_size,
-					p->mini_origin.x + (x + .6) * block_size,
-					p->mini_origin.y + (y + .6) * block_size,
-					COLOR_MINI_WALL
+					buff_img(p),
+					p->mini.ox + (x + .4) * p->mini.block_size,
+					p->mini.oy + (y + .4) * p->mini.block_size,
+					p->mini.ox + (x + .6) * p->mini.block_size,
+					p->mini.oy + (y + .6) * p->mini.block_size,
+					wall_color
 				);
-				// retro_rect fill to do only x-1,y and x, y-1
-				if (in_bounds2D(x - 1, y, &p->map) && p->map.grid[x - 1][y] == WALL)
-					rect_fill(
-						&p->win_img[p->win_buffered],
-						p->mini_origin.x + (x - .6) * block_size,
-						p->mini_origin.y + (y + .4) * block_size,
-						p->mini_origin.x + (x + .4) * block_size,
-						p->mini_origin.y + (y + .6) * block_size,
-						COLOR_MINI_WALL
-					);
-				if (in_bounds2D(x, y - 1, &p->map) && p->map.grid[x][y - 1] == WALL)
-					rect_fill(
-						&p->win_img[p->win_buffered],
-						p->mini_origin.x + (x + .4) * block_size,
-						p->mini_origin.y + (y - .6) * block_size,
-						p->mini_origin.x + (x + .6) * block_size,
-						p->mini_origin.y + (y + .4) * block_size,
-						COLOR_MINI_WALL
-					);
+				// // retro_rect fill to do only x-1,y and x, y-1
+				// if (in_bounds2D(x - 1, y, &p->map) && p->map.grid[x - 1][y] == WALL)
+				// 	rect_fill(
+				// 		buff_img(p),
+				// 		p->mini.ox + (x - .6) * p->mini.block_size,
+				// 		p->mini.oy + (y + .4) * p->mini.block_size,
+				// 		p->mini.ox + (x + .4) * p->mini.block_size,
+				// 		p->mini.oy + (y + .6) * p->mini.block_size,
+				// 		wall_color
+				// 	);
+				// if (in_bounds2D(x, y - 1, &p->map) && p->map.grid[x][y - 1] == WALL)
+				// 	rect_fill(
+				// 		buff_img(p),
+				// 		p->mini.ox + (x + .4) * p->mini.block_size,
+				// 		p->mini.oy + (y - .6) * p->mini.block_size,
+				// 		p->mini.ox + (x + .6) * p->mini.block_size,
+				// 		p->mini.oy + (y + .4) * p->mini.block_size,
+				// 		wall_color
+				// 	);
 			}
 			else if (p->map.pea_sprites_grid[x][y])
 			{
 				draw_circle(
-					&p->win_img[p->win_buffered],
-					pt2d(p->mini_origin.x + x * block_size, p->mini_origin.y + y * block_size),
-					block_size,
+					buff_img(p),
+					pt2d(p->mini.ox + x * p->mini.block_size, p->mini.oy + y * p->mini.block_size),
+					p->mini.block_size,
 					.5,
-					0x00AA33AA
-					);
+					0x00AA33AA);
 			}
 		}
 	}
 	draw_enemies(p);
-	pacu_offset.x = p->mini_origin.x + floor(p->pos.x) * block_size;
-	pacu_offset.y = p->mini_origin.y + floor(p->pos.y) * block_size;
+	pacu_offset.x = p->mini.ox + floor(p->pos.x) * p->mini.block_size;
+	pacu_offset.y = p->mini.oy + floor(p->pos.y) * p->mini.block_size;
 	draw_pacu(
 		p,
 		p->theta,
 		M_PI / 4 * pow(cos(5 * p->time_total), 2),
 		0X00F5C352
 	);
+	minimap_border(p);
 }

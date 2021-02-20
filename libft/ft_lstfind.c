@@ -6,13 +6,13 @@
 /*   By: lzins <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 13:09:21 by lzins             #+#    #+#             */
-/*   Updated: 2021/01/27 13:12:30 by lzins            ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 15:00:05 by lzins            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstfind(t_list *lst, void *content, size_t content_size)
+t_list	*ft_lstfind(t_list *lst, void *content, size_t content_size)
 {
 	while (lst)
 	{

@@ -3,13 +3,22 @@ NO ./brick_wall.xpm
 SO ./brick_wall.xpm
 WE ./brick_wall.xpm
 EA ./brick_wall.xpm
-S ./path_to_the_sprite_texture
-F 255,159,0
-C 126,15,0
+#S ./red_face.xpm
+S ./wolf_hitler.xpm
+#F 255,159,0
+#C 126,15,0
+F funky
+C funky
+GAME on
+MOUSE on
 
+1111111111
+10S001000111111
+T0000100000000T
+111111111111111
 
- 11111111111111
- 11N00002000001
- 10000001111101
- 110000011  121
-  1111111   111
+111111111111111
+100000200010001
+111111111110101
+          10101
+          11111

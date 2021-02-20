@@ -1,25 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textual_check.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lzins <lzins@student.42lyon.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/16 15:59:35 by lzins             #+#    #+#             */
+/*   Updated: 2021/02/20 09:28:36 by lzins            ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parse.h"
 
-static int prefix_check(char *line)
+int			is_map_line(char *line)
 {
-	static char	*prefixes[8] = {"R ", "NO ", "SO ", "WE ", "EA ", "S ", "F ", "C "};
-	static int	i = 0;
+	char	*trimmed;
+	int		ret;
 
-	if (i >= 8)
-		return (0);
-	if (ft_strncmp(line, prefixes[i], ft_strlen(prefixes[i])))
-	{
-		ft_printf("Error\n");
-		ft_printf("%sparameter is not present or at the wrong", prefixes[i]);
-		ft_printf("Line (argument number %i)\n", i + 1);
-		ft_printf("Found : %s\n", line);
-		return (-1);
-	}
-	i++;
-	return (1);
+	ret = 0;
+	if (!(trimmed = ft_strtrim(line, " ")))
+		ret = message_error("malloc error during string trim");
+	if (trimmed[0] && ft_all_in(trimmed, MAP_CHARS))
+		ret = 1;
+	free(trimmed);
+	return (ret);
 }
 
-static int mapline_check(char *line)
+static int	mapline_check(char *line)
 {
 	int begining;
 	int i;
@@ -41,20 +48,23 @@ static int mapline_check(char *line)
 	return (1);
 }
 
-int textual_check(t_list *lst, t_list **map_begin)
+int			textual_check(t_list *lst, t_list **map_begin)
 {
 	int ret;
 
-	ret = 1;
-	while (lst && ret)
+	while (lst)
 	{
-		if ((ret = prefix_check(lst->content)) == -1)
+		if ((ret = is_map_line(lst->content)) == -1)
 			return (-1);
-		*map_begin = lst;
+		if (ret == 1)
+		{
+			*map_begin = lst;
+			break ;
+		}
 		lst = lst->next;
 	}
 	if (!lst)
-		return (-1);
+		return (message_error("no map in scene"));
 	while (lst)
 	{
 		if (mapline_check(lst->content) == -1)

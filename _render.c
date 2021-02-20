@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int main()
+int main(int argc, char **argv)
 {
-	mloop();
+	mloop(argc, argv);
 }

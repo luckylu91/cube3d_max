@@ -1,0 +1,441 @@
+expNew enemy path :   (5,3) ->   (4,3) ->   (4,2) ->   (4,1) ->   (3,1) ->   (2,1) ->   (1,1) -> END
+expected dist 0.00
+enemy jumped			0.000000
+enemy pos (6.50, 3.50)
+------------
+expected dist 0.04
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.043944
+enemy pos (6.46, 3.50)
+------------
+expected dist 0.04
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.043954
+enemy pos (6.41, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.045616
+enemy pos (6.37, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.046783
+enemy pos (6.32, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.048880
+enemy pos (6.27, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.047488
+enemy pos (6.22, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.048864
+enemy pos (6.17, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.048513
+enemy pos (6.13, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.049010
+enemy pos (6.08, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.050064
+enemy pos (6.03, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.049710
+enemy pos (5.98, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.049379
+enemy pos (5.93, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.050556
+enemy pos (5.88, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.052843
+enemy pos (5.82, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.053115
+enemy pos (5.77, 3.50)
+------------
+expected dist 0.05
+next block (5, 3)
+enemy moved toward
+enemy jumped			0.048418
+enemy pos (5.72, 3.50)
+------------
+remaining peas : 33
+Player moved
+New enemy path :   (4,3) ->   (4,2) ->   (3,2) ->   (2,2) ->   (1,2) -> END
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049768
+enemy pos (5.67, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048785
+enemy pos (5.62, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048374
+enemy pos (5.58, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049565
+enemy pos (5.53, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049047
+enemy pos (5.48, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048832
+enemy pos (5.43, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049701
+enemy pos (5.38, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049112
+enemy pos (5.33, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.050442
+enemy pos (5.28, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.050495
+enemy pos (5.23, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.049016
+enemy pos (5.18, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048623
+enemy pos (5.13, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048483
+enemy pos (5.08, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048747
+enemy pos (5.03, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048613
+enemy pos (4.99, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048716
+enemy pos (4.94, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048679
+enemy pos (4.89, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048949
+enemy pos (4.84, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.050551
+enemy pos (4.79, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048714
+enemy pos (4.74, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048321
+enemy pos (4.69, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048727
+enemy pos (4.64, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048765
+enemy pos (4.59, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved toward
+enemy jumped			0.048604
+enemy pos (4.55, 3.50)
+------------
+expected dist 0.05
+next block (4, 3)
+enemy moved to
+popped (4, 3)
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.045357
+enemy pos (4.50, 3.50)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.048627
+enemy pos (4.50, 3.45)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.048644
+enemy pos (4.50, 3.40)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.049054
+enemy pos (4.50, 3.35)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.048899
+enemy pos (4.50, 3.30)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.050835
+enemy pos (4.50, 3.25)
+------------
+Player moved
+New enemy path :   (4,2) ->   (4,1) ->   (3,1) ->   (2,1) ->   (1,1) -> END
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.049306
+enemy pos (4.50, 3.20)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.049064
+enemy pos (4.50, 3.15)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.052325
+enemy pos (4.50, 3.10)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.052178
+enemy pos (4.50, 3.05)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.050673
+enemy pos (4.50, 3.00)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.051007
+enemy pos (4.50, 2.95)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.048752
+enemy pos (4.50, 2.90)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.050326
+enemy pos (4.50, 2.85)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.051362
+enemy pos (4.50, 2.80)
+------------
+expected dist 0.06
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.056569
+enemy pos (4.50, 2.74)
+------------
+expected dist 0.05
+next block (4, 2)
+enemy moved toward
+enemy jumped			0.052019
+enemy pos (4.50, 2.69)
+------------
+Player moved
+New enemy path :   (3,2) ->   (2,2) ->   (1,2) -> END
+expected dist 0.05
+next block (3, 2)
+enemy moved to
+popped (3, 2)
+next block (2, 2)
+enemy moved toward
+enemy jumped			1.067808
+enemy pos (3.45, 2.50)
+------------
+expected dist 0.05
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.054008
+enemy pos (3.39, 2.50)
+------------
+expected dist 0.05
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.053911
+enemy pos (3.34, 2.50)
+------------
+remaining peas : 32
+Player moved
+New enemy path :   (2,2) -> END
+expected dist 0.05
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.052629
+enemy pos (3.29, 2.50)
+------------
+expected dist 0.05
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.053037
+enemy pos (3.24, 2.50)
+------------
+expected dist 0.06
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.056831
+enemy pos (3.18, 2.50)
+------------
+expected dist 0.06
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.056953
+enemy pos (3.12, 2.50)
+------------
+expected dist 0.06
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.058308
+enemy pos (3.06, 2.50)
+------------
+expected dist 0.06
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.058965
+enemy pos (3.00, 2.50)
+------------
+expected dist 0.06
+next block (2, 2)
+enemy moved toward
+enemy jumped			0.059120
+enemy pos (2.94, 2.50)
+------------
+Invulnerability left : 1.000
+remaining peas : 31
+Player moved
+New enemy path :   (2,3) -> END
+expected dist 0.06
+next block (2, 3)
+enemy moved to
+popped (2, 3)
+enemy jumped			1.094517
+enemy pos (2.50, 3.50)
+------------
+Invulnerability left : 0.942
+Invulnerability left : 0.893
+Invulnerability left : 0.843
+Invulnerability left : 0.794
+Invulnerability left : 0.744
+Invulnerability left : 0.695
+Invulnerability left : 0.645

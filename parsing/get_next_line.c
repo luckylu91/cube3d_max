@@ -6,7 +6,7 @@
 /*   By: lzins <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:48:14 by lzins             #+#    #+#             */
-/*   Updated: 2021/01/12 15:51:24 by lzins            ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 16:03:11 by lzins            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int		copy_buffer(t_file *file, char **line)
 	ft_bzero(line_augmented, line_len + BUFFER_SIZE + 1);
 	ft_strccpy(line_augmented, *line, '\0', line_len);
 	free_safe(*line);
-	file->head += ft_strccpy(line_augmented + line_len, file->buffer + file->head,
-			'\n', BUFFER_SIZE - file->head);
+	file->head += ft_strccpy(line_augmented + line_len,
+			file->buffer + file->head, '\n', BUFFER_SIZE - file->head);
 	*line = line_augmented;
 	if (file->buffer[file->head] == '\n')
 	{

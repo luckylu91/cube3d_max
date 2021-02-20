@@ -6,13 +6,13 @@
 /*   By: lzins <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 16:01:01 by lzins             #+#    #+#             */
-/*   Updated: 2021/01/27 17:05:29 by lzins            ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 15:00:21 by lzins            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstremove(t_list **alst, void *content, size_t content_size)
+t_list	*ft_lstremove(t_list **alst, void *content, size_t content_size)
 {
 	t_list *lst;
 	t_list *prev;

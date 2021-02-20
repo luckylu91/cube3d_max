@@ -111,7 +111,7 @@ void render(t_pack *p)
 			sqdist = ray_march3D(&p->pos3d, &ray_dir, &p->map, &hit);
 			//ray_time += (double)(clock() - start_ray) / CLOCKS_PER_SEC;
 			if (sqdist >= 0.)
-				color_pix(&p->win_img[p->win_buffered], i, j,
+				color_pix(buff_img(p), i, j,
 					*get_pix_address(
 						&p->cube_faces[hit.cardinal],
 						hit.left_right_coef * p->cube_faces[hit.cardinal].width,
@@ -125,9 +125,6 @@ void render(t_pack *p)
 	if (beg_cpt < 10)
 	{
 		end = clock();
-		printf("main loop duration : %.6fs\n", (double)(end - start_while) / CLOCKS_PER_SEC);
-		printf("render whole duration : %.6fs\n", (double)(end - start_fun) / CLOCKS_PER_SEC);
-		//printf("total rays duration : %.6fs\n", ray_time);
 		outside = clock();
 		beg_cpt++;
 	}

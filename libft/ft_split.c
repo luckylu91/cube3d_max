@@ -6,13 +6,14 @@
 /*   By: lzins <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:16:45 by lzins             #+#    #+#             */
-/*   Updated: 2021/01/12 15:21:48 by lzins            ###   ########lyon.fr   */
+/*   Updated: 2021/02/17 15:00:29 by lzins            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char const	*skip(char const *s, char *delim, int skip_sep, size_t *flen)
+static char const	*skip(char const *s, char *delim, int skip_sep,
+	size_t *flen)
 {
 	int i;
 
